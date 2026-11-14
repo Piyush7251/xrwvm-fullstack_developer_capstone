@@ -38,5 +38,5 @@ jobs:
 
       - name: Lint JavaScript with JSHint
         run: |
-          echo '{"esversion": 11, "node": true}' > /tmp/.jshintrc
+          echo '{"esversion": 11, "node": true, "sub": true}' > /tmp/.jshintrc
           jshint --config /tmp/.jshintrc server/database/app.js

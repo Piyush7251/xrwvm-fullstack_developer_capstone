@@ -130,3 +130,5 @@ dmypy.json
 
 .venv/
 server/frontend/build/
+
+node_modules/
