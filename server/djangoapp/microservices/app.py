@@ -1,6 +1,13 @@
 from flask import Flask
+import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 import json
+
+try:
+    nltk.data.find('sentiment/vader_lexicon.zip')
+except LookupError:
+    nltk.download('vader_lexicon', quiet=True)
+
 app = Flask("Sentiment Analyzer")
 
 sia = SentimentIntensityAnalyzer()
