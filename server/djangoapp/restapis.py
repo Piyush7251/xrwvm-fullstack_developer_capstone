@@ -7,10 +7,17 @@ load_dotenv()
 backend_url = os.getenv(
     'backend_url', default="http://localhost:3030"
 )
+if not backend_url.startswith(("http://", "https://")):
+    backend_url = "https://" + backend_url
+
 sentiment_analyzer_url = os.getenv(
     'sentiment_analyzer_url',
     default="http://localhost:5050/"
 )
+if not sentiment_analyzer_url.startswith(("http://", "https://")):
+    sentiment_analyzer_url = "https://" + sentiment_analyzer_url
+if not sentiment_analyzer_url.endswith("/"):
+    sentiment_analyzer_url += "/"
 
 
 def get_request(endpoint, **kwargs):

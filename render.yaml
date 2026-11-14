@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: dealership-database
+    runtime: node
+    plan: free
+    rootDir: server/database
+    buildCommand: npm install
+    startCommand: node app.js
+
+  - type: web
+    name: dealership-sentiment
+    runtime: python
+    plan: free
+    rootDir: server/djangoapp/microservices
+    buildCommand: pip install -r requirements.txt && python -c "import nltk; nltk.download('vader_lexicon')"
+    startCommand: gunicorn --bind 0.0.0.0:$PORT app:app
+
+  - type: web
+    name: dealership-capstone
+    runtime: docker
+    plan: free
+    rootDir: server
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: backend_url
+        fromService:
+          type: web
+          name: dealership-database
+          property: host
+      - key: sentiment_analyzer_url
+        fromService:
+          type: web
+          name: dealership-sentiment
+          property: host
