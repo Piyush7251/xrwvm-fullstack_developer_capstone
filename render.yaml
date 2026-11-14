@@ -26,9 +26,9 @@ services:
         fromService:
           type: web
           name: dealership-database
-          property: host
+          property: hostport
       - key: sentiment_analyzer_url
         fromService:
           type: web
           name: dealership-sentiment
-          property: host
+          property: hostport
